@@ -1,6 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/python
 # Edit at https://www.toptal.com/developers/gitignore?templates=python
-
+my_credentials.json
 ### Python ###
 # Byte-compiled / optimized / DLL files
 .ruff_chache

@@ -1,6 +1,7 @@
 import streamlit as st
 from backend import produtos
 
+
 class HeaderDisplay:
     def __init__(self, title="Cadastro de Pedidos", subtitle=None):
         self.title = title
@@ -73,22 +74,22 @@ class CartDisplay:
 
         if st.session_state.carrinho:
             st.subheader("Lista de Vendas")
-            
+
             for index, item in enumerate(st.session_state.carrinho):
                 col1, col2, col3 = st.columns([3, 1, 1])
-                
+
                 with col1:
                     st.write(f"{item['quantidade']} unidade(s) {item['produto']} - R$ {item['valor_total']:.2f}")
-                
+
                 with col2:
                     if st.button(f"Remover", key=f"remove_{index}"):
                         st.session_state.remove_index = index
                         st.rerun()
-                
+
                 with col3:
                     if st.button(f"Editar", key=f"edit_{index}"):
                         st.session_state.editing_item = index
-                
+
                 if 'editing_item' in st.session_state and st.session_state.editing_item == index:
                     new_quantity = st.number_input("Nova quantidade", min_value=1, value=item['quantidade'], key=f"edit_quantity_{index}")
                     if st.button("Confirmar edição", key=f"confirm_edit_{index}"):
@@ -96,9 +97,15 @@ class CartDisplay:
                         item['valor_total'] = new_quantity * (item['valor_total'] / item['quantidade'])
                         del st.session_state.editing_item
                         st.rerun()
-            
+
             total = sum(item['valor_total'] for item in st.session_state.carrinho)
             st.write(f"Total: R$ {total:.2f}")
+
+            # # Botão para salvar no banco de dados
+            # if st.button("Salvar no Banco de Dados"):
+            #     for item in st.session_state.carrinho:
+            #         add_venda(item['produto'], item['quantidade'], item['valor_total'])
+            #     st.success("Vendas salvas no banco de dados com sucesso!")
 
             if st.button("Limpar a lista inteira"):
                 st.session_state.carrinho = []
