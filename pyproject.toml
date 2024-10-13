@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "sistema-lanches-indio"
+version = "0.1.0"
+description = ""
+authors = ["Ismael Henrique Araujo Santana <ismael.santana@ifood.com.br>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.12.5"
+streamlit = "^1.39.0"
+ruff = "^0.6.9"
+taskipy = "^1.13.0"
+
+[tool.taskipy.tasks]
+ruff = "ruff check"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
